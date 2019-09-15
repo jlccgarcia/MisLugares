@@ -24,15 +24,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/accion_preferencias" />
+
         <Button
             android:id="@+id/button03"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/accion_acerca_de" />
+
         <Button
             android:id="@+id/button04"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="lanzarSalir"
             android:text="@string/accion_salir" />
     </LinearLayout>
 

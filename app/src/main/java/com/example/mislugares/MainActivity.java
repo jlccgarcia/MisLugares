@@ -1,5 +1,6 @@
 package com.example.mislugares;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,14 +9,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
+
+    //Para generar un AcercaDe en vez de hacerlo directamente sobre el atributo XML android:onClick
+    private Button bAcercaDe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //  setContentView(R.layout.edicion_lugar); //Para probar el edicion_lugar.xml, comentando línea anterior y todas las siguientes
+        /*
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -25,6 +31,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+        */
+        //Para definir el evento onClick (en vez de rellenando directamente el atributo XML
+        //android:onClick dentro del content_main.xml), se haría:
+        bAcercaDe = findViewById(R.id.button03);
+        bAcercaDe.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                lanzarAcercaDe(null);
             }
         });
     }
@@ -48,5 +63,14 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void lanzarAcercaDe(View view){
+        Intent i = new Intent(this, AcercaDeActivity.class);
+        startActivity(i);
+    }
+
+    public void lanzarSalir (View view) {
+        finish();
     }
 }
