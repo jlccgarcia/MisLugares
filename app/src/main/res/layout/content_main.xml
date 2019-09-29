@@ -14,10 +14,12 @@
         android:gravity="center"
         android:orientation="vertical"
         android:padding="30dp">
+
         <Button
             android:id="@+id/button01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="lanzarVistaLugar"
             android:text="@string/accion_mostrar" />
         <Button
             android:id="@+id/button02"
@@ -29,6 +31,7 @@
             android:id="@+id/button03"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="lanzarAcercaDe"
             android:text="@string/accion_acerca_de" />
 
         <Button

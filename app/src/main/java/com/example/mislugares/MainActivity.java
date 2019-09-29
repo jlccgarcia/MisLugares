@@ -1,20 +1,26 @@
 package com.example.mislugares;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
     //Para generar un AcercaDe en vez de hacerlo directamente sobre el atributo XML android:onClick
     private Button bAcercaDe;
+
+    public static Lugares lugares = new LugaresVector();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+        return true;
+        }
+        if (id == R.id.menu_buscar) {
+            lanzarVistaLugar(null);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -72,5 +82,29 @@ public class MainActivity extends AppCompatActivity {
 
     public void lanzarSalir (View view) {
         finish();
+    }
+
+    public void lanzarVistaLugar (View view) {
+    /* Opción básica de lanzar la actividad --> Siempre mostrando el mismo lugar, el de id=0
+        Intent i = new Intent(this, VistaLugarActivity.class);
+        i.putExtra("id", (long)0);
+        startActivity(i);*/
+
+        //Opción más avanzada para que el usario elija el lugar a mostrar
+        final EditText entrada = new EditText(this);
+        entrada.setText("0");
+        new AlertDialog.Builder(this)
+                .setTitle("Selección de lugar")
+                .setMessage("indica su id (0-4):")
+                .setView(entrada)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        long id = Long.parseLong(entrada.getText().toString());
+                        Intent i = new Intent(MainActivity.this, VistaLugarActivity.class);
+                        i.putExtra("id", id);
+                        startActivity(i);
+                    }})
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 }
